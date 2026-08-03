@@ -35,6 +35,7 @@ defmodule EctoPSQLExtras.UnusedIndexes do
     WHERE NOT indisunique AND idx_scan < <%= min_scans %> AND pg_relation_size(relid) > 5 * 8192
     ORDER BY pg_relation_size(i.indexrelid) / nullif(idx_scan, 0) DESC NULLS FIRST,
     pg_relation_size(i.indexrelid) DESC;
-    """ |> EEx.eval_string(args)
+    """
+    |> EEx.eval_string(args)
   end
 end

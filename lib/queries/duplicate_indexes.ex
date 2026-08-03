@@ -3,7 +3,8 @@ defmodule EctoPSQLExtras.DuplicateIndexes do
 
   def info do
     %{
-      title: "Multiple indexes that have the same set of columns, same opclass, expression and predicate.",
+      title:
+        "Multiple indexes that have the same set of columns, same opclass, expression and predicate.",
       index: 7,
       columns: [
         %{name: :size, type: :string},
@@ -28,6 +29,7 @@ defmodule EctoPSQLExtras.DuplicateIndexes do
       FROM pg_index) sub
     GROUP BY key HAVING count(*)>1
     ORDER BY sum(pg_relation_size(idx)) DESC;
-    """ |> EEx.eval_string(args)
+    """
+    |> EEx.eval_string(args)
   end
 end

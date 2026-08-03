@@ -53,7 +53,7 @@ defmodule EctoPSQLExtras.NullIndexes do
         AND pg_relation_size(c.oid) > <%= min_relation_size_mb %> * 1024 ^ 2
     ORDER BY
       pg_relation_size(c.oid) * s.null_frac DESC;
-    """ |> EEx.eval_string(args)
+    """
+    |> EEx.eval_string(args)
   end
 end
-

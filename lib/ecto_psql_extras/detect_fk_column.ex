@@ -1,21 +1,22 @@
 defmodule EctoPSQLExtras.DetectFkColumn do
-  defp plural_rules, do: [
-    {~r/s$/i, "s"},
-    {~r/^(ax|test)is$/i, "\\1es"},
-    {~r/(octop|vir)us$/i, "\\1i"},
-    {~r/(alias|status)$/i, "\\1es"},
-    {~r/(bu)s$/i, "\\1ses"},
-    {~r/(buffal|tomat)o$/i, "\\1oes"},
-    {~r/([ti])um$/i, "\\1a"},
-    {~r/sis$/i, "ses"},
-    {~r/(?:([^f])fe|([lr])f)$/i, "\\1\\2ves"},
-    {~r/([^aeiouy]|qu)y$/i, "\\1ies"},
-    {~r/(x|ch|ss|sh)$/i, "\\1es"},
-    {~r/(matr|vert|ind)(?:ix|ex)$/i, "\\1ices"},
-    {~r/^(m|l)ouse$/i, "\\1ice"},
-    {~r/^(ox)$/i, "\\1en"},
-    {~r/(quiz)$/i, "\\1zes"}
-  ]
+  defp plural_rules,
+    do: [
+      {~r/s$/i, "s"},
+      {~r/^(ax|test)is$/i, "\\1es"},
+      {~r/(octop|vir)us$/i, "\\1i"},
+      {~r/(alias|status)$/i, "\\1es"},
+      {~r/(bu)s$/i, "\\1ses"},
+      {~r/(buffal|tomat)o$/i, "\\1oes"},
+      {~r/([ti])um$/i, "\\1a"},
+      {~r/sis$/i, "ses"},
+      {~r/(?:([^f])fe|([lr])f)$/i, "\\1\\2ves"},
+      {~r/([^aeiouy]|qu)y$/i, "\\1ies"},
+      {~r/(x|ch|ss|sh)$/i, "\\1es"},
+      {~r/(matr|vert|ind)(?:ix|ex)$/i, "\\1ices"},
+      {~r/^(m|l)ouse$/i, "\\1ice"},
+      {~r/^(ox)$/i, "\\1en"},
+      {~r/(quiz)$/i, "\\1zes"}
+    ]
 
   @irregular %{
     "person" => "people",

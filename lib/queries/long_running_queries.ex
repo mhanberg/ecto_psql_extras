@@ -31,6 +31,7 @@ defmodule EctoPSQLExtras.LongRunningQueries do
       AND now() - pg_stat_activity.query_start > interval '<%= threshold %>'
     ORDER BY
       now() - pg_stat_activity.query_start DESC;
-    """ |> EEx.eval_string(args)
+    """
+    |> EEx.eval_string(args)
   end
 end

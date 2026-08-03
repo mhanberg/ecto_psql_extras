@@ -30,6 +30,7 @@ defmodule EctoPSQLExtras.Calls do
     AND query NOT LIKE '/* ECTO_PSQL_EXTRAS:%'
     ORDER BY calls DESC
     LIMIT <%= limit %>;
-    """ |> EEx.eval_string(args)
+    """
+    |> EEx.eval_string(args)
   end
 end
