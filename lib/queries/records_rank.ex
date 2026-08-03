@@ -15,16 +15,16 @@ defmodule EctoPSQLExtras.RecordsRank do
   end
 
   def query(_args \\ []) do
-    """
-    /* ECTO_PSQL_EXTRAS: All tables and the number of rows in each ordered by number of rows descending */
+    {"""
+     /* ECTO_PSQL_EXTRAS: All tables and the number of rows in each ordered by number of rows descending */
 
-    SELECT
-      schemaname AS schema, relname AS name,
-      n_live_tup AS estimated_count
-    FROM
-      pg_stat_user_tables
-    ORDER BY
-      n_live_tup DESC;
-    """
+     SELECT
+       schemaname AS schema, relname AS name,
+       n_live_tup AS estimated_count
+     FROM
+       pg_stat_user_tables
+     ORDER BY
+       n_live_tup DESC;
+     """, []}
   end
 end

@@ -12,9 +12,9 @@ defmodule EctoPSQLExtras.SSLUsed do
   end
 
   def query(_args \\ []) do
-    """
-    /* ECTO_PSQL_EXTRAS: Check if SSL connection is used  */
-    SELECT ssl_is_used();
-    """
+    {"""
+     /* ECTO_PSQL_EXTRAS: Check if SSL connection is used  */
+     SELECT ssl_is_used();
+     """, []}
   end
 end

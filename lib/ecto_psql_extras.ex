@@ -12,7 +12,7 @@ defmodule EctoPSQLExtras do
               optional(:args_for_select) => list
             }
 
-  @callback query :: binary
+  @callback query(args :: keyword) :: {binary, list}
 
   @type repo :: module() | {module(), node()}
 
@@ -138,10 +138,13 @@ defmodule EctoPSQLExtras do
     query_module = Map.fetch!(queries(repo), name)
     opts = prepare_opts(opts, query_module.info()[:default_args])
 
+    {statement, params} = query_module.query(Keyword.fetch!(opts, :args))
+
     result =
       query!(
         repo,
-        query_module.query(Keyword.fetch!(opts, :args)),
+        statement,
+        params,
         Keyword.get(opts, :query_opts, @default_query_opts)
       )
 
@@ -152,10 +155,10 @@ defmodule EctoPSQLExtras do
     )
   end
 
-  defp query!(repo, query, query_opts \\ @default_query_opts)
+  defp query!(repo, query, params \\ [], query_opts \\ @default_query_opts)
 
-  defp query!({repo, node}, query, query_opts) do
-    case :rpc.call(node, repo, :query!, [query, [], query_opts]) do
+  defp query!({repo, node}, query, params, query_opts) do
+    case :rpc.call(node, repo, :query!, [query, params, query_opts]) do
       {:badrpc, {:EXIT, {:undef, _}}} ->
         raise "repository is not defined on remote node"
 
@@ -167,8 +170,8 @@ defmodule EctoPSQLExtras do
     end
   end
 
-  defp query!(repo, query, query_opts) do
-    repo.query!(query, [], query_opts)
+  defp query!(repo, query, params, query_opts) do
+    repo.query!(query, params, query_opts)
   end
 
   @doc """

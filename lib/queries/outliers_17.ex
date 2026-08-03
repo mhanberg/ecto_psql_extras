@@ -18,19 +18,18 @@ defmodule EctoPSQLExtras.Outliers17 do
   end
 
   def query(args \\ []) do
-    """
-    /* ECTO_PSQL_EXTRAS: Queries that have longest execution time in aggregate */
+    {"""
+     /* ECTO_PSQL_EXTRAS: Queries that have longest execution time in aggregate */
 
-    SELECT query AS query,
-    interval '1 millisecond' * total_exec_time AS exec_time,
-    (total_exec_time/sum(total_exec_time) OVER()) AS prop_exec_time,
-    calls,
-    interval '1 millisecond' * (shared_blk_read_time + shared_blk_write_time) AS sync_io_time
-    FROM pg_stat_statements WHERE userid = (SELECT usesysid FROM pg_user WHERE usename = current_user LIMIT 1)
-    AND query NOT LIKE '/* ECTO_PSQL_EXTRAS:%'
-    ORDER BY total_exec_time DESC
-    LIMIT <%= limit %>;
-    """
-    |> EEx.eval_string(args)
+     SELECT query AS query,
+     interval '1 millisecond' * total_exec_time AS exec_time,
+     (total_exec_time/sum(total_exec_time) OVER()) AS prop_exec_time,
+     calls,
+     interval '1 millisecond' * (shared_blk_read_time + shared_blk_write_time) AS sync_io_time
+     FROM pg_stat_statements WHERE userid = (SELECT usesysid FROM pg_user WHERE usename = current_user LIMIT 1)
+     AND query NOT LIKE '/* ECTO_PSQL_EXTRAS:%'
+     ORDER BY total_exec_time DESC
+     LIMIT $1;
+     """, [args[:limit]]}
   end
 end
