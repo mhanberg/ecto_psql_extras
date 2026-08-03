@@ -12,7 +12,8 @@ defmodule EctoPSQLExtras.Bloat do
         %{name: :object_name, type: :string},
         %{name: :bloat, type: :numeric},
         %{name: :waste, type: :bytes}
-      ]
+      ],
+      parameters: []
     }
   end
 

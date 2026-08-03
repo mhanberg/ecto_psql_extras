@@ -12,7 +12,8 @@ defmodule EctoPSQLExtras.Blocking do
         %{name: :blocking_pid, type: :integer},
         %{name: :blocked_statement, type: :string},
         %{name: :blocked_duration, type: :interval}
-      ]
+      ],
+      parameters: []
     }
   end
 

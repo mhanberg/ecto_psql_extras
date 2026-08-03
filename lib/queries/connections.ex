@@ -8,7 +8,8 @@ defmodule EctoPSQLExtras.Connections do
         %{name: :username, type: :string},
         %{name: :client_address, type: :string},
         %{name: :application_name, type: :string}
-      ]
+      ],
+      parameters: []
     }
   end
 

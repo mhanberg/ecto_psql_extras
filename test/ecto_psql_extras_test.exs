@@ -27,6 +27,14 @@ defmodule EctoPSQLExtrasTest do
         assert column.type
       end
 
+      assert is_list(info.parameters)
+
+      for parameter <- info.parameters do
+        assert is_atom(parameter.name)
+        assert is_atom(parameter.type)
+        assert Map.keys(parameter) -- [:name, :type, :default, :description] == []
+      end
+
       for {order_by, dir} <- info[:order_by] || [] do
         assert dir in [:asc, :desc]
         assert Enum.find(info.columns, &(&1.name == order_by))

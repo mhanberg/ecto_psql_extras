@@ -10,7 +10,8 @@ defmodule EctoPSQLExtras.TableIndexesSize do
         %{name: :schema, type: :string},
         %{name: :table, type: :string},
         %{name: :index_size, type: :bytes}
-      ]
+      ],
+      parameters: []
     }
   end
 

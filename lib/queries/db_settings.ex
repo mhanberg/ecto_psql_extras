@@ -10,7 +10,8 @@ defmodule EctoPSQLExtras.DbSettings do
         %{name: :setting, type: :string},
         %{name: :unit, type: :string},
         %{name: :short_desc, type: :string}
-      ]
+      ],
+      parameters: []
     }
   end
 

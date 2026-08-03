@@ -7,7 +7,8 @@ defmodule EctoPSQLExtras.SSLUsed do
       index: 9,
       columns: [
         %{name: :ssl_is_used, type: :boolean}
-      ]
+      ],
+      parameters: []
     }
   end
 

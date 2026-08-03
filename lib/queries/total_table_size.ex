@@ -10,7 +10,8 @@ defmodule EctoPSQLExtras.TotalTableSize do
         %{name: :schema, type: :string},
         %{name: :name, type: :string},
         %{name: :size, type: :bytes}
-      ]
+      ],
+      parameters: []
     }
   end
 

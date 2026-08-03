@@ -11,7 +11,8 @@ defmodule EctoPSQLExtras.Extensions do
         %{name: :default_version, type: :string},
         %{name: :installed_version, type: :string},
         %{name: :comment, type: :string}
-      ]
+      ],
+      parameters: []
     }
   end
 

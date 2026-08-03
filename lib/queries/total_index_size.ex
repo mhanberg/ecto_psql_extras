@@ -7,7 +7,8 @@ defmodule EctoPSQLExtras.TotalIndexSize do
       index: 13,
       columns: [
         %{name: :size, type: :bytes}
-      ]
+      ],
+      parameters: []
     }
   end
 

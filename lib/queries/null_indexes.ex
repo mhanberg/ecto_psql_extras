@@ -14,6 +14,14 @@ defmodule EctoPSQLExtras.NullIndexes do
         %{name: :indexed_column, type: :string},
         %{name: :null_frac, type: :string},
         %{name: :expected_saving, type: :string}
+      ],
+      parameters: [
+        %{
+          name: :min_relation_size_mb,
+          type: :integer,
+          default: 0,
+          description: "Minimum relation size in megabytes."
+        }
       ]
     }
   end

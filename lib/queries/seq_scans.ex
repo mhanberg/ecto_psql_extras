@@ -10,7 +10,8 @@ defmodule EctoPSQLExtras.SeqScans do
         %{name: :schema, type: :string},
         %{name: :name, type: :string},
         %{name: :count, type: :integer}
-      ]
+      ],
+      parameters: []
     }
   end
 

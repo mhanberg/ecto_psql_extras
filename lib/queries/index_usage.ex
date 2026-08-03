@@ -10,7 +10,8 @@ defmodule EctoPSQLExtras.IndexUsage do
         %{name: :name, type: :string},
         %{name: :percent_of_times_index_used, type: :numeric},
         %{name: :rows_in_table, type: :int}
-      ]
+      ],
+      parameters: []
     }
   end
 

@@ -11,6 +11,14 @@ defmodule EctoPSQLExtras.LongRunningQueries do
         %{name: :pid, type: :int},
         %{name: :duration, type: :interval},
         %{name: :query, type: :string}
+      ],
+      parameters: [
+        %{
+          name: :threshold,
+          type: :string,
+          default: "500 milliseconds",
+          description: "Minimum query duration."
+        }
       ]
     }
   end

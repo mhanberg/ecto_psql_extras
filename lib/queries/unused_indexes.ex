@@ -12,6 +12,14 @@ defmodule EctoPSQLExtras.UnusedIndexes do
         %{name: :index, type: :string},
         %{name: :index_size, type: :bytes},
         %{name: :index_scans, type: :integer}
+      ],
+      parameters: [
+        %{
+          name: :min_scans,
+          type: :integer,
+          default: 50,
+          description: "Filter results with at least this many scans."
+        }
       ]
     }
   end

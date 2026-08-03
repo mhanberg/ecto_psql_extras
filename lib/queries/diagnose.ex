@@ -10,7 +10,8 @@ defmodule EctoPSQLExtras.Diagnose do
         %{name: :ok, type: :boolean},
         %{name: :check_name, type: :string},
         %{name: :message, type: :string}
-      ]
+      ],
+      parameters: []
     }
   end
 

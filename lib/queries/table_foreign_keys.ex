@@ -4,12 +4,20 @@ defmodule EctoPSQLExtras.TableForeignKeys do
   def info do
     %{
       title: "Foreign keys info",
+      default_args: [table_name: nil],
       columns: [
         %{name: :table_name, type: :string},
         %{name: :constraint_name, type: :string},
         %{name: :column_name, type: :string},
         %{name: :foreign_table_name, type: :string},
         %{name: :foreign_column_name, type: :string}
+      ],
+      parameters: [
+        %{
+          name: :table_name,
+          type: :string,
+          description: "Filter foreign keys by table name. Omit to search all tables."
+        }
       ]
     }
   end

@@ -10,7 +10,8 @@ defmodule EctoPSQLExtras.RecordsRank do
         %{name: :schema, type: :string},
         %{name: :name, type: :string},
         %{name: :estimated_count, type: :integer}
-      ]
+      ],
+      parameters: []
     }
   end
 

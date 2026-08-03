@@ -4,12 +4,20 @@ defmodule EctoPSQLExtras.TableSchema do
   def info do
     %{
       title: "Column names and types",
+      default_args: [table_name: nil],
       columns: [
         %{name: :column_name, type: :string},
         %{name: :data_type, type: :string},
         %{name: :is_nullable, type: :boolean},
         %{name: :column_default, type: :string},
         %{name: :table_name, type: :string}
+      ],
+      parameters: [
+        %{
+          name: :table_name,
+          type: :string,
+          description: "Filter results by table name. Omit to search all tables."
+        }
       ]
     }
   end

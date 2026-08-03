@@ -6,6 +6,14 @@ defmodule EctoPSQLExtras do
   @callback info :: %{
               required(:title) => binary,
               required(:columns) => [%{name: atom, type: atom}],
+              required(:parameters) => [
+                %{
+                  required(:name) => atom,
+                  required(:type) => atom,
+                  optional(:default) => term,
+                  optional(:description) => binary
+                }
+              ],
               optional(:order_by) => [{atom, :asc | :desc}],
               optional(:index) => integer,
               optional(:default_args) => list,

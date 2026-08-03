@@ -10,7 +10,8 @@ defmodule EctoPSQLExtras.Indexes do
         %{name: :indexname, type: :string},
         %{name: :tablename, type: :string},
         %{name: :columns, type: :string}
-      ]
+      ],
+      parameters: []
     }
   end
 

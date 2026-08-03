@@ -14,7 +14,8 @@ defmodule EctoPSQLExtras.VacuumStats do
         %{name: :dead_rowcount, type: :string},
         %{name: :autovacuum_threshold, type: :string},
         %{name: :expect_autovacuum, type: :string}
-      ]
+      ],
+      parameters: []
     }
   end
 

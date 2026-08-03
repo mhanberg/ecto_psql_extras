@@ -12,7 +12,8 @@ defmodule EctoPSQLExtras.DuplicateIndexes do
         %{name: :idx2, type: :string},
         %{name: :idx3, type: :string},
         %{name: :idx4, type: :string}
-      ]
+      ],
+      parameters: []
     }
   end
 

@@ -8,7 +8,8 @@ defmodule EctoPSQLExtras.CacheHit do
       columns: [
         %{name: :name, type: :string},
         %{name: :ratio, type: :numeric}
-      ]
+      ],
+      parameters: []
     }
   end
 

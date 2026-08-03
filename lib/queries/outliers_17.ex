@@ -13,6 +13,14 @@ defmodule EctoPSQLExtras.Outliers17 do
         %{name: :prop_exec_time, type: :percent},
         %{name: :calls, type: :integer},
         %{name: :sync_io_time, type: :interval}
+      ],
+      parameters: [
+        %{
+          name: :limit,
+          type: :integer,
+          default: 10,
+          description: "Maximum queries to return."
+        }
       ]
     }
   end

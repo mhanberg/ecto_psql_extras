@@ -6,7 +6,8 @@ defmodule EctoPSQLExtras.KillAll do
       title: "Kill all the active database connections",
       columns: [
         %{name: :killed, type: :boolean}
-      ]
+      ],
+      parameters: []
     }
   end
 

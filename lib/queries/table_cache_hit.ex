@@ -13,7 +13,8 @@ defmodule EctoPSQLExtras.TableCacheHit do
         %{name: :block_reads, type: :integer},
         %{name: :total_read, type: :integer},
         %{name: :ratio, type: :numeric}
-      ]
+      ],
+      parameters: []
     }
   end
 

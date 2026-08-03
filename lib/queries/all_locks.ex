@@ -13,7 +13,8 @@ defmodule EctoPSQLExtras.AllLocks do
         %{name: :query_snippet, type: :string},
         %{name: :mode, type: :string},
         %{name: :age, type: :interval}
-      ]
+      ],
+      parameters: []
     }
   end
 
