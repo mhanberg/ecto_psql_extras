@@ -23,7 +23,7 @@ defmodule EctoPSQLExtras.Mixfile do
       {:ecto_sql, "~> 3.7"},
       {:postgrex, "~> 0.16 or ~> 1.0"},
       {:ex_doc, ">= 0.30.0", only: :dev, runtime: false},
-      {:mock, "~> 0.3.0", only: :test}
+      {:meck, "~> 1.2", only: :test}
     ]
   end
 
