@@ -164,3 +164,24 @@ jobs:
         run: |
           sleep 4 # wait pg
           mix test --include distribution
+
+  format:
+    name: mix formatt (Elixir ${{matrix.pair.elixir}} | Erlang/OTP ${{matrix.pair.otp}})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - pair:
+              elixir: 1.18
+              otp: 27
+    steps:
+      - uses: actions/checkout@v4
+      - uses: erlef/setup-beam@v1
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+        with:
+          otp-version: ${{matrix.pair.otp}}
+          elixir-version: ${{matrix.pair.elixir}}
+      - name: Check formatting
+        run: mix format --check-formatted
