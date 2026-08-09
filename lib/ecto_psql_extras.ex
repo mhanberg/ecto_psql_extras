@@ -26,8 +26,6 @@ defmodule EctoPSQLExtras do
   def queries(repo \\ nil) do
     %{
       diagnose: EctoPSQLExtras.Diagnose,
-      missing_fk_indexes: EctoPSQLExtras.MissingFkIndexes,
-      missing_fk_constraints: EctoPSQLExtras.MissingFkConstraints,
       bloat: EctoPSQLExtras.Bloat,
       blocking: EctoPSQLExtras.Blocking,
       cache_hit: EctoPSQLExtras.CacheHit,
@@ -136,33 +134,6 @@ defmodule EctoPSQLExtras do
     )
   end
 
-  def query(:missing_fk_indexes, repo, opts) do
-    query_module = Map.fetch!(queries(repo), :missing_fk_indexes)
-
-    opts = prepare_opts(opts, query_module.info()[:default_args])
-
-    result = EctoPSQLExtras.MissingFkIndexesLogic.run(repo, opts[:args][:table_name])
-
-    format(
-      Keyword.fetch!(opts, :format),
-      query_module.info(),
-      result
-    )
-  end
-
-  def query(:missing_fk_constraints, repo, opts) do
-    query_module = Map.fetch!(queries(repo), :missing_fk_constraints)
-    result = EctoPSQLExtras.MissingFkConstraintsLogic.run(repo, opts[:args][:table_name])
-
-    opts = prepare_opts(opts, query_module.info()[:default_args])
-
-    format(
-      Keyword.fetch!(opts, :format),
-      query_module.info(),
-      result
-    )
-  end
-
   def query(name, repo, opts) do
     query_module = Map.fetch!(queries(repo), name)
     opts = prepare_opts(opts, query_module.info()[:default_args])
@@ -234,20 +205,6 @@ defmodule EctoPSQLExtras do
   `format` is either `:ascii` or `:raw`
   """
   def diagnose(repo, opts \\ []), do: query(:diagnose, repo, opts)
-
-  @doc """
-  Run `missing_fk_indexes` query on `repo`, in the given `format`.
-
-  `format` is either `:ascii` or `:raw`
-  """
-  def missing_fk_indexes(repo, opts \\ []), do: query(:missing_fk_indexes, repo, opts)
-
-  @doc """
-  Run `missing_fk_constraints` query on `repo`, in the given `format`.
-
-  `format` is either `:ascii` or `:raw`
-  """
-  def missing_fk_constraints(repo, opts \\ []), do: query(:missing_fk_constraints, repo, opts)
 
   @doc """
   Run `extensions` query on `repo`, in the given `format`.

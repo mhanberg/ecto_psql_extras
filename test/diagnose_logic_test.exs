@@ -111,31 +111,6 @@ defmodule DiagnoseLogicTest do
           ]
         ]
       }
-    end,
-    missing_fk_indexes: fn _repo, _opts ->
-      %Postgrex.Result{
-        columns: ["table", "column_name"],
-        command: :select,
-        connection_id: 28521,
-        messages: [],
-        num_rows: 0,
-        rows: [
-          ["posts", "topic_id"],
-          ["users", "company_id"]
-        ]
-      }
-    end,
-    missing_fk_constraints: fn _repo, _opts ->
-      %Postgrex.Result{
-        columns: ["table", "column_name"],
-        command: :select,
-        connection_id: 28521,
-        messages: [],
-        num_rows: 0,
-        rows: [
-          ["posts", "topic_id"]
-        ]
-      }
     end do
     capture_io(fn ->
       EctoPSQLExtras.diagnose(EctoPSQLExtras.TestRepo)
@@ -144,7 +119,7 @@ defmodule DiagnoseLogicTest do
     result = EctoPSQLExtras.DiagnoseLogic.run(EctoPSQLExtras.TestRepo)
 
     assert length(result.columns) == 3
-    assert Enum.at(Enum.at(result.rows, 0), 1) == "missing_fk_indexes"
+    assert Enum.at(Enum.at(result.rows, 0), 1) == "table_cache_hit"
   end
 
   @tag capture_log: true

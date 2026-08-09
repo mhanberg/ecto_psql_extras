@@ -22,8 +22,6 @@ defmodule EctoPSQLExtras.DiagnoseLogic do
       %{
         columns: ["ok", "check_name", "message"],
         rows: [
-          missing_fk_indexes(repo),
-          missing_fk_constraints(repo),
           table_cache_hit(repo),
           index_cache_hit(repo),
           unused_indexes(repo),
@@ -49,46 +47,6 @@ defmodule EctoPSQLExtras.DiagnoseLogic do
           ]
         }
     end
-  end
-
-  defp missing_fk_indexes(repo) do
-    missing = EctoPSQLExtras.missing_fk_indexes(repo, format: :raw)
-
-    [ok, message] =
-      case missing.rows do
-        [] ->
-          [true, "No missing foreign key indexes detected."]
-
-        _ ->
-          print_missing =
-            Enum.map_join(missing.rows, ", ", fn el ->
-              "'#{Enum.at(el, 0)}'.'#{Enum.at(el, 1)}'"
-            end)
-
-          [false, "Missing foreign key indexes detected: #{print_missing}"]
-      end
-
-    [ok, "missing_fk_indexes", message]
-  end
-
-  defp missing_fk_constraints(repo) do
-    missing = EctoPSQLExtras.missing_fk_constraints(repo, format: :raw)
-
-    [ok, message] =
-      case missing.rows do
-        [] ->
-          [true, "No missing foreign key constraints detected."]
-
-        _ ->
-          print_missing =
-            Enum.map_join(missing.rows, ", ", fn el ->
-              "'#{Enum.at(el, 0)}'.'#{Enum.at(el, 1)}'"
-            end)
-
-          [false, "Missing foreign key constraints detected: #{print_missing}"]
-      end
-
-    [ok, "missing_fk_constraints", message]
   end
 
   defp table_cache_hit(repo) do
