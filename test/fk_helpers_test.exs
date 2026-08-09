@@ -66,5 +66,4 @@ defmodule FkHelpersTest do
       assert Enum.sort(result.rows) == Enum.sort(expected)
     end
   end
-
 end

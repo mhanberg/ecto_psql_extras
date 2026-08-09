@@ -28,4 +28,3 @@ defmodule EctoPSQLExtras.DbSettings do
     """
   end
 end
-
