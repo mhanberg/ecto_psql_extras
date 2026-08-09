@@ -41,7 +41,6 @@ defmodule EctoPSQLExtras do
       locks: EctoPSQLExtras.Locks,
       all_locks: EctoPSQLExtras.AllLocks,
       long_running_queries: EctoPSQLExtras.LongRunningQueries,
-      mandelbrot: EctoPSQLExtras.Mandelbrot,
       records_rank: EctoPSQLExtras.RecordsRank,
       seq_scans: EctoPSQLExtras.SeqScans,
       table_indexes_size: EctoPSQLExtras.TableIndexesSize,
@@ -305,13 +304,6 @@ defmodule EctoPSQLExtras do
   `format` is either `:ascii` or `:raw`
   """
   def long_running_queries(repo, opts \\ []), do: query(:long_running_queries, repo, opts)
-
-  @doc """
-  Run `mandelbrot` query on `repo`, in the given `format`.
-
-  `format` is either `:ascii` or `:raw`
-  """
-  def mandelbrot(repo, opts \\ []), do: query(:mandelbrot, repo, opts)
 
   @doc """
   Run `records_rank` query on `repo`, in the given `format`.

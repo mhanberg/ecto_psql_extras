@@ -576,14 +576,6 @@ EctoPSQLExtras.extensions(YourApp.Repo)
 
 This command lists all the currently installed and available PostgreSQL extensions.
 
-### `mandelbrot`
-
-```elixir
-EctoPSQLExtras.mandelbrot(YourApp.Repo)
-```
-
-This command outputs the Mandelbrot set, calculated through SQL.
-
 ### `connections`
 
 ```
