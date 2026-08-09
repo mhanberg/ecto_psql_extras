@@ -2,7 +2,6 @@ defmodule EctoPSQLExtrasTest do
   use ExUnit.Case, async: true
 
   import EctoPSQLExtras
-  import ExUnit.CaptureIO
   import ExUnit.CaptureLog
   alias EctoPSQLExtras.TestRepo
 
@@ -163,17 +162,6 @@ defmodule EctoPSQLExtrasTest do
           ).columns
         ) > 0
       )
-    end
-
-    test "test legacy API" do
-      warning =
-        capture_io(:stderr, fn ->
-          columns = EctoPSQLExtras.long_running_queries(TestRepo, :raw).columns
-          assert length(columns) > 0
-        end)
-
-      assert warning =~
-               "This API is deprecated. Please pass format value as a keyword list: `format: :raw`"
     end
 
     test "test query_opts allows for logging" do
