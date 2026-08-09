@@ -197,15 +197,8 @@ defmodule EctoPSQLExtrasTest do
                   [elem(el, 0) | acc]
               end
             end) do
-        assert(
-          length(
-            apply(
-              EctoPSQLExtras,
-              query,
-              [TestRepo, [format: :raw]]
-            ).columns
-          ) > 0
-        )
+        result = apply(EctoPSQLExtras, query, [TestRepo, [format: :raw]])
+        assert length(result.columns) > 0
       end
     end
   end

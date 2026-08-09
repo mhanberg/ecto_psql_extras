@@ -10,20 +10,6 @@ This library is an optional dependency of [Phoenix.LiveDashboard](https://hexdoc
 
 ![Phoenix Ecto Dashboard](https://github.com/pawurb/ecto_psql_extras/raw/main/phoenix-dashboard-diagnose2.png)
 
-Alternative versions:
-
-- [Ruby](https://github.com/pawurb/ruby-pg-extras)
-
-- [Ruby on Rails](https://github.com/pawurb/rails-pg-extras)
-
-- [Rust](https://github.com/pawurb/rust-pg-extras)
-
-- [NodeJS](https://github.com/pawurb/node-postgres-extras)
-
-- [Python](https://github.com/pawurb/python-pg-extras)
-
-- [Haskell](https://github.com/pawurb/haskell-pg-extras)
-
 ## Installation
 
 `mix.exs`
@@ -81,7 +67,6 @@ EctoPSQLExtras.index_cache_hit(YourApp.Repo, format: :raw)
   num_rows: 1,
   rows: [["schema_migrations", 0, 1, 1, "0"]]
 }
-
 ```
 
 You can also run queries by passing their name to the `query` method:
