@@ -16,21 +16,20 @@ defmodule EctoPSQLExtras.TableSchema do
 
   def query(args \\ []) do
     if args[:table_name] do
-      """
-      /* ECTO_PSQL_EXTRAS: Table column names and types */
+      {"""
+       /* ECTO_PSQL_EXTRAS: Table column names and types */
 
-      SELECT column_name, data_type, is_nullable, column_default, table_name
-      FROM information_schema.columns
-      WHERE table_name = '<%= table_name %>';
-      """
-      |> EEx.eval_string(args)
+       SELECT column_name, data_type, is_nullable, column_default, table_name
+       FROM information_schema.columns
+       WHERE table_name = $1;
+       """, [to_string(args[:table_name])]}
     else
-      """
-      /* ECTO_PSQL_EXTRAS: All database column names and types */
+      {"""
+       /* ECTO_PSQL_EXTRAS: All database column names and types */
 
-      SELECT column_name, data_type, is_nullable, column_default, table_name
-      FROM information_schema.columns;
-      """
+       SELECT column_name, data_type, is_nullable, column_default, table_name
+       FROM information_schema.columns;
+       """, []}
     end
   end
 end

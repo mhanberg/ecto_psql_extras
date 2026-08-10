@@ -16,22 +16,21 @@ defmodule EctoPSQLExtras.LongRunningQueries do
   end
 
   def query(args \\ []) do
-    """
-    /* ECTO_PSQL_EXTRAS: All queries longer than the threshold by descending duration */
+    {"""
+     /* ECTO_PSQL_EXTRAS: All queries longer than the threshold by descending duration */
 
-    SELECT
-      pid,
-      now() - pg_stat_activity.query_start AS duration,
-      query AS query
-    FROM
-      pg_stat_activity
-    WHERE
-      pg_stat_activity.query <> ''::text
-      AND state <> 'idle'
-      AND now() - pg_stat_activity.query_start > interval '<%= threshold %>'
-    ORDER BY
-      now() - pg_stat_activity.query_start DESC;
-    """
-    |> EEx.eval_string(args)
+     SELECT
+       pid,
+       now() - pg_stat_activity.query_start AS duration,
+       query AS query
+     FROM
+       pg_stat_activity
+     WHERE
+       pg_stat_activity.query <> ''::text
+       AND state <> 'idle'
+       AND now() - pg_stat_activity.query_start > $1::text::interval
+     ORDER BY
+       now() - pg_stat_activity.query_start DESC;
+     """, [to_string(args[:threshold])]}
   end
 end

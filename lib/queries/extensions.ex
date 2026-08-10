@@ -16,12 +16,12 @@ defmodule EctoPSQLExtras.Extensions do
   end
 
   def query(_args \\ []) do
-    """
-    /* ECTO_PSQL_EXTRAS: Available and installed extensions */
+    {"""
+     /* ECTO_PSQL_EXTRAS: Available and installed extensions */
 
-    SELECT name, default_version, installed_version, comment
-    FROM pg_available_extensions
-    ORDER BY installed_version;
-    """
+     SELECT name, default_version, installed_version, comment
+     FROM pg_available_extensions
+     ORDER BY installed_version;
+     """, []}
   end
 end
