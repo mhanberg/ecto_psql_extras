@@ -16,7 +16,7 @@ defmodule EctoPSQLExtras.UnusedIndexes do
     }
   end
 
-  def query(args \\ []) do
+  def query(args) do
     {"""
      /* ECTO_PSQL_EXTRAS: Unused and almost unused indexes */
      /* Ordered by their size relative to the number of index scans.

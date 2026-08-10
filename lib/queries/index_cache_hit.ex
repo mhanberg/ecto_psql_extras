@@ -17,7 +17,7 @@ defmodule EctoPSQLExtras.IndexCacheHit do
     }
   end
 
-  def query(_args \\ []) do
+  def query(_args) do
     {"""
      /* ECTO_PSQL_EXTRAS: Calculates your cache hit rate for reading indexes */
 

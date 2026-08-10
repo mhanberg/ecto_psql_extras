@@ -10,7 +10,7 @@ defmodule EctoPSQLExtras.KillAll do
     }
   end
 
-  def query(_args \\ []) do
+  def query(_args) do
     {"""
      /* ECTO_PSQL_EXTRAS: Kill all the active database connections */
 

@@ -15,7 +15,7 @@ defmodule EctoPSQLExtras.LongRunningQueries do
     }
   end
 
-  def query(args \\ []) do
+  def query(args) do
     {"""
      /* ECTO_PSQL_EXTRAS: All queries longer than the threshold by descending duration */
 

@@ -14,7 +14,7 @@ defmodule EctoPSQLExtras.Indexes do
     }
   end
 
-  def query(_args \\ []) do
+  def query(_args) do
     {"""
      /* ECTO_PSQL_EXTRAS: List all the indexes with their corresponding tables and columns */
      SELECT

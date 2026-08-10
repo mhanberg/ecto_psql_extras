@@ -16,7 +16,7 @@ defmodule EctoPSQLExtras.DuplicateIndexes do
     }
   end
 
-  def query(_args \\ []) do
+  def query(_args) do
     {"""
      /* ECTO_PSQL_EXTRAS: Multiple indexes that have the same set of columns, same opclass, expression and predicate */
 

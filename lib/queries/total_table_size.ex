@@ -14,7 +14,7 @@ defmodule EctoPSQLExtras.TotalTableSize do
     }
   end
 
-  def query(_args \\ []) do
+  def query(_args) do
     {"""
      /* ECTO_PSQL_EXTRAS: Size of the tables (including indexes), descending by size */
 

@@ -14,7 +14,7 @@ defmodule EctoPSQLExtras.RecordsRank do
     }
   end
 
-  def query(_args \\ []) do
+  def query(_args) do
     {"""
      /* ECTO_PSQL_EXTRAS: All tables and the number of rows in each ordered by number of rows descending */
 

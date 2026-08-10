@@ -12,7 +12,7 @@ defmodule EctoPSQLExtras.Connections do
     }
   end
 
-  def query(_args \\ []) do
+  def query(_args) do
     {"""
      /* ECTO_PSQL_EXTRAS: Returns the list of all active database connections */
 

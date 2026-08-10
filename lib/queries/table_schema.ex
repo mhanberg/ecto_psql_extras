@@ -14,7 +14,7 @@ defmodule EctoPSQLExtras.TableSchema do
     }
   end
 
-  def query(args \\ []) do
+  def query(args) do
     if args[:table_name] do
       {"""
        /* ECTO_PSQL_EXTRAS: Table column names and types */

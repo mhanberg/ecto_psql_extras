@@ -18,7 +18,7 @@ defmodule EctoPSQLExtras.VacuumStats do
     }
   end
 
-  def query(_args \\ %{}) do
+  def query(_args) do
     {"""
      /* ECTO_PSQL_EXTRAS: Dead rows and whether an automatic vacuum is expected to be triggered */
 

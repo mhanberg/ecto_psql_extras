@@ -16,7 +16,7 @@ defmodule EctoPSQLExtras.CallsLegacy do
     }
   end
 
-  def query(args \\ []) do
+  def query(args) do
     {"""
      /* ECTO_PSQL_EXTRAS: Queries that have the highest frequency of execution */
 

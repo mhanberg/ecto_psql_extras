@@ -155,7 +155,9 @@ defmodule EctoPSQLExtras do
     )
   end
 
-  defp query!(repo, query, params \\ [], query_opts \\ @default_query_opts)
+  defp query!(repo, query) do
+    query!(repo, query, [], @default_query_opts)
+  end
 
   defp query!({repo, node}, query, params, query_opts) do
     case :rpc.call(node, repo, :query!, [query, params, query_opts]) do

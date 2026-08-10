@@ -18,7 +18,7 @@ defmodule EctoPSQLExtras.NullIndexes do
     }
   end
 
-  def query(args \\ []) do
+  def query(args) do
     {"""
      /* ECTO_PSQL_EXTRAS: Find indexes with a high ratio of NULL values */
 

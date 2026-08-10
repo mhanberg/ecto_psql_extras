@@ -16,7 +16,7 @@ defmodule EctoPSQLExtras.Bloat do
     }
   end
 
-  def query(_args \\ []) do
+  def query(_args) do
     {"""
      /* ECTO_PSQL_EXTRAS: Table and index bloat in your database ordered by most wasteful */
 

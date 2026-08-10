@@ -14,7 +14,7 @@ defmodule EctoPSQLExtras.Diagnose do
     }
   end
 
-  def query(_args \\ []) do
+  def query(_args) do
     # placeholder
   end
 end

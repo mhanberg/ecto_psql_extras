@@ -14,7 +14,7 @@ defmodule EctoPSQLExtras.IndexUsage do
     }
   end
 
-  def query(_args \\ []) do
+  def query(_args) do
     {"""
      /* ECTO_PSQL_EXTRAS: Index hit rate (effective databases are at 99% and up) */
 
