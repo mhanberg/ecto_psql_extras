@@ -3,7 +3,6 @@ defmodule DiagnoseLogicTest do
   alias EctoPSQLExtras.TestRepo
 
   import ExUnit.CaptureIO
-  import Mock
 
   setup do
     start_supervised!(TestRepo)
@@ -16,8 +15,10 @@ defmodule DiagnoseLogicTest do
     :ok
   end
 
-  test_with_mock "it works", EctoPSQLExtras, [:passthrough],
-    unused_indexes: fn _repo, _opts ->
+  test "it works" do
+    :meck.new(EctoPSQLExtras, [:passthrough])
+
+    :meck.expect(EctoPSQLExtras, :unused_indexes, fn _repo, _opts ->
       %Postgrex.Result{
         columns: ["schema", "table", "index", "index_size", "index_scans"],
         command: :select,
@@ -30,8 +31,9 @@ defmodule DiagnoseLogicTest do
           ["public", "public.channels", "index_channels_on_slack_id", 1_000_001, 7]
         ]
       }
-    end,
-    null_indexes: fn _repo, _opts ->
+    end)
+
+    :meck.expect(EctoPSQLExtras, :null_indexes, fn _repo, _opts ->
       %Postgrex.Result{
         columns: [
           "oid",
@@ -61,8 +63,9 @@ defmodule DiagnoseLogicTest do
           ]
         ]
       }
-    end,
-    bloat: fn _repo, _opts ->
+    end)
+
+    :meck.expect(EctoPSQLExtras, :bloat, fn _repo, _opts ->
       %Postgrex.Result{
         columns: ["type", "schemaname", "object_name", "bloat", "waste"],
         command: :select,
@@ -74,8 +77,9 @@ defmodule DiagnoseLogicTest do
           ["table", "public", "less_bloated_table_1", Decimal.from_float(1.4), 800]
         ]
       }
-    end,
-    duplicate_indexes: fn _repo, _opts ->
+    end)
+
+    :meck.expect(EctoPSQLExtras, :duplicate_indexes, fn _repo, _opts ->
       %Postgrex.Result{
         columns: ["size", "idx1", "idx2", "idx3", "idx4"],
         command: :select,
@@ -86,8 +90,9 @@ defmodule DiagnoseLogicTest do
           ["128 kb", "users_pkey", "index_users_id", nil, nil]
         ]
       }
-    end,
-    outliers: fn _repo, _opts ->
+    end)
+
+    :meck.expect(EctoPSQLExtras, :outliers, fn _repo, _opts ->
       %Postgrex.Result{
         columns: ["query", "exec_time", "prop_exec_time", "ncalls", "sync_io_time"],
         command: :select,
@@ -111,22 +116,33 @@ defmodule DiagnoseLogicTest do
           ]
         ]
       }
-    end do
-    capture_io(fn ->
-      EctoPSQLExtras.diagnose(EctoPSQLExtras.TestRepo)
     end)
 
-    result = EctoPSQLExtras.DiagnoseLogic.run(EctoPSQLExtras.TestRepo)
+    try do
+      {result, _} =
+        with_io(fn ->
+          EctoPSQLExtras.diagnose(EctoPSQLExtras.TestRepo, format: :raw)
+        end)
 
-    assert length(result.columns) == 3
-    assert Enum.at(Enum.at(result.rows, 0), 1) == "table_cache_hit"
+      assert Enum.at(Enum.at(result.rows, 0), 1) == "table_cache_hit"
+      assert length(result.columns) == 3
+    after
+      :meck.unload(EctoPSQLExtras)
+    end
   end
 
   @tag capture_log: true
-  test_with_mock "rescues random database errors", EctoPSQLExtras, [:passthrough],
-    unused_indexes: fn _repo, _opts ->
+  test "rescues random database errors" do
+    :meck.new(EctoPSQLExtras, [:passthrough])
+
+    :meck.expect(EctoPSQLExtras, :unused_indexes, fn _repo, _opts ->
       raise "random error"
-    end do
-    EctoPSQLExtras.DiagnoseLogic.run(EctoPSQLExtras.TestRepo)
+    end)
+
+    try do
+      EctoPSQLExtras.DiagnoseLogic.run(EctoPSQLExtras.TestRepo)
+    after
+      :meck.unload(EctoPSQLExtras)
+    end
   end
 end
